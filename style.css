@@ -17,11 +17,12 @@ body {
 }
 
 .grid-container {
+  margin-top: 50px;
   display: grid;
   width: 100%;
-  max-width: 600px;
-  min-height: 600px;
-  margin: 24px auto;
+  max-width: 450px;
+  min-height: 450px;
+  margin: 100px auto;
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(3, 1fr);
 }
