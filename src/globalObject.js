@@ -10,3 +10,7 @@ export let Players = {
     name: "Player--2"
   }
 };
+
+export let playerActive = {
+  activePlayer: 1
+};
