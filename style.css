@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Rampart+One&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -9,6 +10,7 @@ header {
   font-size: 24px;
   text-align: center;
   padding-top: 20px;
+  font-family: "Rampart One", cursive;
 }
 
 body {
@@ -17,16 +19,43 @@ body {
 }
 
 .grid-container {
-  margin-top: 50px;
+  /* margin-top: 20px; */
   display: grid;
   width: 100%;
   max-width: 450px;
   min-height: 450px;
-  margin: 100px auto;
+  margin: 40px auto;
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(3, 1fr);
 }
 
 .item {
   border: 1px solid white;
+}
+
+.player-container {
+  display: flex;
+  justify-content: center;
+  margin: 12px auto;
+  gap: 15px;
+}
+
+.btn {
+  text-decoration: none;
+  color: black;
+  padding: 15px;
+  background-color: white;
+  border-radius: 8px;
+  font-family: "Rampart One", cursive;
+}
+
+.restartbtn {
+  padding: 15px 30px;
+}
+
+.display {
+  text-align: center;
+  color: white;
+  font-size: 40px;
+  font-family: "Rampart One", cursive;
 }
