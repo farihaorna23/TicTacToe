@@ -25,30 +25,34 @@ function switchPlayer(playerActive) {
 
 for (let i = 0; i < boxes.length; i++) {
   boxes[i].addEventListener("click", e => {
-    //prevents users from clicking a box that has been marked
-    if (e.target.textContent !== "") {
-      return;
+    console.log(playerActive);
+    console.log(playerActive.playing); //why false when marking the box for the second time?
+    if (playerActive.playing) {
+      //prevents users from clicking a box that has been marked
+      if (e.target.textContent !== "") {
+        return;
+      }
+
+      //console.log(`Active Player in addEvent is ${playerActive.activePlayer}`);
+      e.target.textContent = `${playerActive.activePlayer == 1 ? "X" : "O"}`;
+      e.target.style.color = "white";
+      e.target.style.fontSize = "50px";
+      e.target.style.padding = "50px";
+
+      let row;
+      let column = i % 3;
+      if (i >= 0 && i <= 2) {
+        row = 0;
+      } else if (i > 2 && i <= 5) {
+        row = 1;
+      } else {
+        row = 2;
+      }
+
+      gameBoard[row][column] = playerActive.activePlayer === 1 ? "X" : "O";
+      checkGameBoard(gameBoard);
+      switchPlayer(playerActive);
     }
-
-    console.log(`Active Player in addEvent is ${playerActive.activePlayer}`);
-    e.target.textContent = `${playerActive.activePlayer == 1 ? "X" : "O"}`;
-    e.target.style.color = "white";
-    e.target.style.fontSize = "50px";
-    e.target.style.padding = "50px";
-
-    let row;
-    let column = i % 3;
-    if (i >= 0 && i <= 2) {
-      row = 0;
-    } else if (i > 2 && i <= 5) {
-      row = 1;
-    } else {
-      row = 2;
-    }
-
-    gameBoard[row][column] = playerActive.activePlayer === 1 ? "X" : "O";
-    checkGameBoard(gameBoard);
-    switchPlayer(playerActive);
   });
 }
 
@@ -59,6 +63,7 @@ function restartButton() {
   console.log(playerActive);
   console.log(boxes);
   playerActive.activePlayer = 1;
+  playerActive.playing = true;
   console.log(playerActive.activePlayer);
   player1btn.style.backgroundColor = "red";
   player2btn.style.backgroundColor = "white";
@@ -79,6 +84,7 @@ function restartButton() {
 
 function displayWinner(message) {
   display.textContent = message;
+  playerActive.playing = false;
 }
 
 function checkGameBoard(gameBoard) {
@@ -89,9 +95,9 @@ function checkGameBoard(gameBoard) {
       gameBoard[i][0] === gameBoard[i][2]
     ) {
       if (gameBoard[i][0] === "X") {
-        displayWinner("Player 1 won");
+        displayWinner("Player 1 won !!");
       } else {
-        displayWinner("Player 2 won");
+        displayWinner("Player 2 won !!");
       }
     } else if (
       gameBoard[0][i] !== "" &&
@@ -99,9 +105,9 @@ function checkGameBoard(gameBoard) {
       gameBoard[0][i] === gameBoard[2][i]
     ) {
       if (gameBoard[0][i] === "X") {
-        displayWinner("Player 1 won");
+        displayWinner("Player 1 won !!");
       } else {
-        displayWinner("Player 2 won");
+        displayWinner("Player 2 won !!");
       }
     } else if (
       gameBoard[0][0] !== "" &&
@@ -109,9 +115,9 @@ function checkGameBoard(gameBoard) {
       gameBoard[0][0] === gameBoard[2][2]
     ) {
       if (gameBoard[0][0] === "X") {
-        displayWinner("Player 1 won");
+        displayWinner("Player 1 won !!");
       } else {
-        displayWinner("Player 2 won");
+        displayWinner("Player 2 won !!");
       }
     } else if (
       gameBoard[0][2] !== "" &&
@@ -119,9 +125,9 @@ function checkGameBoard(gameBoard) {
       gameBoard[0][2] === gameBoard[2][0]
     ) {
       if (gameBoard[0][2] === "X") {
-        displayWinner("Player 1 won");
+        displayWinner("Player 1 won !!");
       } else {
-        displayWinner("Player 2 won");
+        displayWinner("Player 2 won !!");
       }
     }
   }
