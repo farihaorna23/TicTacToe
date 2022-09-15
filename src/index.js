@@ -25,8 +25,7 @@ function switchPlayer(playerActive) {
 
 for (let i = 0; i < boxes.length; i++) {
   boxes[i].addEventListener("click", e => {
-    //console.log(e.target);
-
+    //prevents users from clicking a box that has been marked
     if (e.target.textContent !== "") {
       return;
     }
@@ -70,6 +69,7 @@ function restartButton() {
     boxes[i].textContent = "";
   }
 
+  //clearing up the gameboard
   for (let i = 0; i < 3; i++) {
     for (let j = 0; i < 3; i++) {
       gameBoard[i][j] = "";
@@ -89,9 +89,9 @@ function checkGameBoard(gameBoard) {
       gameBoard[i][0] === gameBoard[i][2]
     ) {
       if (gameBoard[i][0] === "X") {
-        console.log("Player 1 won");
+        displayWinner("Player 1 won");
       } else {
-        console.log("Player 2 won");
+        displayWinner("Player 2 won");
       }
     } else if (
       gameBoard[0][i] !== "" &&
@@ -99,9 +99,9 @@ function checkGameBoard(gameBoard) {
       gameBoard[0][i] === gameBoard[2][i]
     ) {
       if (gameBoard[0][i] === "X") {
-        console.log("Player 1 won");
+        displayWinner("Player 1 won");
       } else {
-        console.log("Player 2 won");
+        displayWinner("Player 2 won");
       }
     } else if (
       gameBoard[0][0] !== "" &&
@@ -109,9 +109,9 @@ function checkGameBoard(gameBoard) {
       gameBoard[0][0] === gameBoard[2][2]
     ) {
       if (gameBoard[0][0] === "X") {
-        console.log("Player 1 won");
+        displayWinner("Player 1 won");
       } else {
-        console.log("Player 2 won");
+        displayWinner("Player 2 won");
       }
     } else if (
       gameBoard[0][2] !== "" &&
@@ -119,9 +119,9 @@ function checkGameBoard(gameBoard) {
       gameBoard[0][2] === gameBoard[2][0]
     ) {
       if (gameBoard[0][2] === "X") {
-        console.log("Player 1 won");
+        displayWinner("Player 1 won");
       } else {
-        console.log("Player 2 won");
+        displayWinner("Player 2 won");
       }
     }
   }
