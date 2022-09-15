@@ -1,13 +1,13 @@
 import { Gameboard, Players, playerActive } from "./globalObject.js";
-import { boxes, player1btn, player2btn, gameBoard } from "./globalVariables.js";
+import {
+  boxes,
+  player1btn,
+  player2btn,
+  gameBoard,
+  display,
+  restartbtn
+} from "./globalVariables.js";
 
-console.log(playerActive.activePlayer, player1btn);
-console.log(player2btn);
-
-//maybe put it in a function
-//when start button is pressed, it will first start with player1
-//so player1 will turn red
-//before the game it should be white for both button
 if (playerActive.activePlayer === 1) {
   player1btn.style.backgroundColor = "red";
 }
@@ -21,14 +21,16 @@ function switchPlayer(playerActive) {
   player2btn.style.backgroundColor = `${
     playerActive.activePlayer === 2 ? "red" : "white"
   }`;
-  console.log("*********");
-  console.log(player1btn);
-  console.log(player2btn); //it is white. not red.
 }
 
 for (let i = 0; i < boxes.length; i++) {
   boxes[i].addEventListener("click", e => {
     //console.log(e.target);
+
+    if (e.target.textContent !== "") {
+      return;
+    }
+
     console.log(`Active Player in addEvent is ${playerActive.activePlayer}`);
     e.target.textContent = `${playerActive.activePlayer == 1 ? "X" : "O"}`;
     e.target.style.color = "white";
@@ -46,9 +48,83 @@ for (let i = 0; i < boxes.length; i++) {
     }
 
     gameBoard[row][column] = playerActive.activePlayer === 1 ? "X" : "O";
-
+    checkGameBoard(gameBoard);
     switchPlayer(playerActive);
   });
+}
+
+restartbtn.addEventListener("click", restartButton);
+
+//does clear up but when try to play again, sometimes the box doesn't get marked
+function restartButton() {
+  console.log(playerActive);
+  console.log(boxes);
+  playerActive.activePlayer = 1;
+  console.log(playerActive.activePlayer);
+  player1btn.style.backgroundColor = "red";
+  player2btn.style.backgroundColor = "white";
+  console.log("Inside restart button");
+  // console.log(playerActive.activePlayer);
+  console.log(player1btn);
+  for (let i = 0; i < boxes.length; i++) {
+    boxes[i].textContent = "";
+  }
+
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; i < 3; i++) {
+      gameBoard[i][j] = "";
+    }
+  }
+}
+
+function displayWinner(message) {
+  display.textContent = message;
+}
+
+function checkGameBoard(gameBoard) {
+  for (let i = 0; i < gameBoard.length; i++) {
+    if (
+      gameBoard[i][0] !== "" &&
+      gameBoard[i][0] === gameBoard[i][1] &&
+      gameBoard[i][0] === gameBoard[i][2]
+    ) {
+      if (gameBoard[i][0] === "X") {
+        console.log("Player 1 won");
+      } else {
+        console.log("Player 2 won");
+      }
+    } else if (
+      gameBoard[0][i] !== "" &&
+      gameBoard[0][i] === gameBoard[1][i] &&
+      gameBoard[0][i] === gameBoard[2][i]
+    ) {
+      if (gameBoard[0][i] === "X") {
+        console.log("Player 1 won");
+      } else {
+        console.log("Player 2 won");
+      }
+    } else if (
+      gameBoard[0][0] !== "" &&
+      gameBoard[0][0] === gameBoard[1][1] &&
+      gameBoard[0][0] === gameBoard[2][2]
+    ) {
+      if (gameBoard[0][0] === "X") {
+        console.log("Player 1 won");
+      } else {
+        console.log("Player 2 won");
+      }
+    } else if (
+      gameBoard[0][2] !== "" &&
+      gameBoard[0][2] === gameBoard[1][1] &&
+      gameBoard[0][2] === gameBoard[2][0]
+    ) {
+      if (gameBoard[0][2] === "X") {
+        console.log("Player 1 won");
+      } else {
+        console.log("Player 2 won");
+      }
+    }
+  }
 }
 
 //Uncaught TypeError: Assignment to constant variable. at HTMLDivElement.<anonymous> (index.js:24:1
