@@ -23,10 +23,30 @@ function switchPlayer(playerActive) {
   }`;
 }
 
+function checkForTie() {
+  let isFull = true;
+  outerLoop: for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (gameBoard[i][j] == "") {
+        isFull = false;
+        break outerLoop;
+      }
+    }
+  }
+
+  if (isFull == false) {
+    console.log("Not a tie");
+  } else {
+    displayWinner("It is a Tie !!");
+  }
+}
+
 for (let i = 0; i < boxes.length; i++) {
   boxes[i].addEventListener("click", e => {
-    console.log(playerActive);
-    console.log(playerActive.playing); //why false when marking the box for the second time?
+    // console.log(playerActive);
+    // console.log(playerActive.playing); //why false when marking the box for the second time?
+
+    //if the player still playing as in it is value true, allow users to keep playing
     if (playerActive.playing) {
       //prevents users from clicking a box that has been marked
       if (e.target.textContent !== "") {
@@ -69,6 +89,7 @@ function restartButton() {
   player2btn.style.backgroundColor = "white";
   console.log("Inside restart button");
   // console.log(playerActive.activePlayer);
+  display.textContent = "Let's Play!!";
   console.log(player1btn);
   for (let i = 0; i < boxes.length; i++) {
     boxes[i].textContent = "";
@@ -76,15 +97,17 @@ function restartButton() {
 
   //clearing up the gameboard
   for (let i = 0; i < 3; i++) {
-    for (let j = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
       gameBoard[i][j] = "";
     }
   }
 }
 
 function displayWinner(message) {
-  display.textContent = message;
+  console.log(message);
   playerActive.playing = false;
+  display.textContent = message;
+  console.log(playerActive);
 }
 
 function checkGameBoard(gameBoard) {
@@ -129,8 +152,8 @@ function checkGameBoard(gameBoard) {
       } else {
         displayWinner("Player 2 won !!");
       }
+    } else {
+      checkForTie();
     }
   }
 }
-
-//Uncaught TypeError: Assignment to constant variable. at HTMLDivElement.<anonymous> (index.js:24:1
