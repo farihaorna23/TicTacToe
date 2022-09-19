@@ -34,10 +34,8 @@ function checkForTie() {
     }
   }
 
-  if (isFull == false) {
-    console.log("Not a tie");
-  } else {
-    displayWinner("It is a Tie !!");
+  if (isFull !== false) {
+    displayWinner("It is a Tie!");
   }
 }
 
