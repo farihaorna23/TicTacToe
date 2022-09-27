@@ -68,6 +68,8 @@ for (let i = 0; i < boxes.length; i++) {
       }
 
       gameBoard[row][column] = playerActive.activePlayer === 1 ? "X" : "O";
+      playerActive.counter += 1;
+      console.log(`In addEvent ${playerActive.counter}`);
       checkGameBoard(gameBoard);
       switchPlayer(playerActive);
     }
@@ -82,6 +84,7 @@ function restartButton() {
   console.log(boxes);
   playerActive.activePlayer = 1;
   playerActive.playing = true;
+  playerActive.counter = 0;
   console.log(playerActive.activePlayer);
   player1btn.style.backgroundColor = "red";
   player2btn.style.backgroundColor = "white";
@@ -109,6 +112,7 @@ function displayWinner(message) {
 }
 
 function checkGameBoard(gameBoard) {
+  console.log(`In gameboard ${playerActive.counter}`);
   for (let i = 0; i < gameBoard.length; i++) {
     if (
       gameBoard[i][0] !== "" &&
@@ -151,7 +155,9 @@ function checkGameBoard(gameBoard) {
         displayWinner("Player 2 won !!");
       }
     } else {
-      checkForTie();
+      if (playerActive.counter === 9) {
+        checkForTie();
+      }
     }
   }
 }

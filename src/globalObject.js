@@ -13,5 +13,6 @@ export let Players = {
 
 export let playerActive = {
   activePlayer: 1,
-  playing: true
+  playing: true,
+  counter: 0
 };
